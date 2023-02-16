@@ -3,11 +3,12 @@ import throttle from 'lodash.throttle';
 const LOCALKEY = 'feedback-form-state';
 
 const formData = {};
-const parsedData = JSON.parse(localStorage.getItem(LOCALKEY));
 
 const formEl = document.querySelector('form');
 const textAreaEl = document.querySelector('textarea');
 const inputEl = document.querySelector('input');
+
+const parsedData = JSON.parse(localStorage.getItem(LOCALKEY));
 
 formEl.addEventListener('input', throttle(createLocalStorage, 500));
 formEl.addEventListener('submit', clearAndSubmiForm);
@@ -22,8 +23,8 @@ function createLocalStorage(e) {
 
 function clearAndSubmiForm(e) {
   e.preventDefault();
-
-  console.log(parsedData);
+  const submit = { email: inputEl.value, message: textAreaEl.value };
+  console.log(submit);
 
   e.target.reset();
 
